@@ -1,0 +1,107 @@
+#include<stdio.h>
+#include<conio.h>
+#include<malloc.h>
+  struct Llist
+  {
+int Coef;
+   int PWR;
+struct Llist *next;
+};
+struct Llist *P1=NULL,*P2=NULL,*P=NULL;
+void generate(struct Llist *node)
+{
+char C1;
+do
+{
+printf("\n Enter a Coefficient value:");
+scanf("%d",&node->Coef);
+printf("\n Please enter a PWR value:");
+scanf("%d", &node->PWR);
+node->next=(struct Llist*)malloc(sizeof(struct Llist));
+node=node->next;
+node->next=NULL;
+printf("\n Wanna continue? [Y/N]:");
+C1=getch();
+}
+while(C1=='y' || C1=='Y');
+}
+void Display(struct Llist *node)
+{
+while(node->next!=NULL)
+{
+printf("%dx^%d",node->Coef,node->PWR);
+node=node->next;
+if(node->next!=NULL)
+printf("+");
+}
+}
+void Padd(struct Llist *P1,struct Llist *P2,struct Llist *P)
+{
+while(P1->next && P2->next)
+{
+If(P1->PWR >P2-> PWR)
+{
+P -> PWR = P1-> PWR;
+P ->Coef= P1-> Coef;
+P1= P1->next;
+}
+else if(P1->PWR<P2->PWR)
+{
+P->PWR=P2->PWR;
+P->Coef=P2->Coef;
+P2=P2->next;
+   }
+else
+{
+P->PWR=P1->PWR;
+P->Coef=P1->Coef+P2->Coef;
+P1=P1->next;
+P2=P2->next;
+}
+   P->next=(struct Llist *)malloc(sizeof(struct Llist));
+P=P->next;
+P->next=NULL;
+}
+while(P1->next || P2->next)
+{
+if(P1->next)
+{
+P->PWR=P1->PWR;
+P->Coef=P1->Coef;
+P1=P1->next;
+  }
+if(P2->next)
+{
+P->PWR=P2->PWR;
+P->Coef=P2->Coef;
+P2=P2->next;
+}
+P->next=(struct Llist *)malloc(sizeof(struct Llist));
+P=P->next;
+P->next=NULL;
+}
+}
+main() // Main method
+{
+char C1;
+do
+{
+P1=(struct Llist *)malloc(sizeof(struct Llist));
+P2=(struct Llist *)malloc(sizeof(struct Llist));
+P=(struct Llist *)malloc(sizeof(struct Llist));
+printf("\n Enter First No:");
+generate (P1);
+printf("\n Enter second No:");
+generate (P2);
+printf("\n First No is:");
+Display(P1);
+printf("\n Second No is:");
+Display(P2);
+polyadd(P1,P2,P);
+printf("\n Addition of the Polynomial is:");
+Display(P);
+printf("\n Add 2 more No’s:");
+C1=getch();
+}
+while(C1=='y' || C1=='Y');
+}
